@@ -1,0 +1,14 @@
+﻿<component name="ProjectRunConfigurationManager">
+	<configuration default="false" name="Tye Run" type="tye-deploy" factoryName="Tye" server-name="Tye">
+		<deployment type="Tye">
+			<settings>
+				<option name="debugArgument" value="" />
+				<option name="frameworkArgument" value="" />
+				<option name="pathArgument" value="$PROJECT_DIR$" />
+				<option name="tagsArgument" value="" />
+				<option name="watchArgument" value="true" />
+			</settings>
+		</deployment>
+		<method v="2" />
+	</configuration>
+</component>

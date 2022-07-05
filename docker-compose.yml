@@ -1,0 +1,24 @@
+﻿version: "3.9"
+services:
+  vault:
+    image: vault
+    restart: unless-stopped
+    cap_add:
+      # Prevent sensitive values from being swapped to disk.
+      - IPC_LOCK
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root
+      # For interfacing with the Vault through the CLI in the container itself.
+      VAULT_ADDR: http://0.0.0.0:8200
+    ports:
+      - "8200:8200"
+  
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    environment:
+      VAULT_ROOT_TOKEN: root
+      CONNECTIONSTRINGS__VAULT: http://vault:8200
+    ports:
+      - "5000:80"

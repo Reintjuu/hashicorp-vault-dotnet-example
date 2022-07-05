@@ -1,0 +1,25 @@
+name: microservice
+services:
+  - name: backend
+    project: backend/backend.csproj
+    env:
+      - name: VAULT_ROOT_TOKEN
+        value: root
+
+  - name: vault
+    image: vault
+    bindings:
+      - port: 8200
+        containerPort: 8200
+        connectionString: "http://${host}:${port}"
+    env:
+      - name: VAULT_DEV_ROOT_TOKEN_ID
+        value: root
+      - name: VAULT_DEV_LISTEN_ADDRESS
+        value: 0.0.0.0:8200
+        # For interfacing with the Vault through the CLI in the container itself.
+      - name: VAULT_ADDR
+        value: http://0.0.0.0:8200
+        # Skip memory sharing prevention measures, because Tye doesn't allow us to set Docker capabilities.
+      - name: SKIP_SETCAP
+        value: "true"
