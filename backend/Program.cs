@@ -41,9 +41,6 @@ internal static class Program
 
 		builder.Services.AddTransient<IVaultClient, VaultClient>();
 
-		// TODO: Remove when .NET6 fixes get merged. Currently required for VaultChangeWatcher.
-		builder.Services.AddSingleton<IConfigurationRoot>(builder.Configuration);
-
 		builder.Services.AddHostedService<VaultChangeWatcher>();
 
 		builder.Services
